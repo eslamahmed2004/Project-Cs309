@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "react-hook-form": "^7.54.0",
     "root": "^3.2.0"
   }
 }
