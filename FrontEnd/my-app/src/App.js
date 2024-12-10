@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import Signin from './pages/Signin/Signin';
-import Signup from "./pages/Signup/Sginup.jsx";
+import Signup from "./pages/Signup/Signup.jsx";
 import Main from "./pages/Main/Main";
 
 
