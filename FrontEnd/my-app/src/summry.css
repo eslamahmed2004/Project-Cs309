@@ -1,0 +1,132 @@
+/* القواعد الأساسية */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* النصوص */
+h1, h2, h3, h4, h5, h6 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin: 10px 0;
+}
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* الروابط */
+a {
+    color: blue;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* القوائم */
+ul {
+    list-style-type: disc;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+ol {
+    list-style-type: decimal;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+li {
+    margin: 5px 0;
+}
+
+/* الأزرار */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+/* الجداول */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+    text-align: left;
+}
+
+/* النماذج */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* الصور */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* التخطيطات */
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+.col {
+    flex: 1;
+    padding: 10px;
+}
+
+/* الخلفيات */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* التأثيرات */
+.shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.rounded {
+    border-radius: 50%;
+}
+
+/* وسائل الإعلام (Responsive Design) */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+/* التحولات والانتقالات */
+.transition {
+    transition: all 0.3s ease;
+}
+.transform {
+    transform: rotate(45deg);
+}
