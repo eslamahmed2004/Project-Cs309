@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
-
 
 
 
@@ -16,8 +13,8 @@ const SignUp = () => {
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
+
   const onSubmit = (data) => {
-    
     console.log("Form Data:", data);
     alert("Sign Up Successful!");
   };
@@ -27,16 +24,11 @@ const SignUp = () => {
   return (
     <div>
 <div style={styles.background}>
-  <img
-    src="/wallpaper.jpg"
-    alt="Background"
-    style={styles.responsiveImage}
-  />
+  <img src="/wallpaper.jpg" alt="Background" style={{ maxWidth: "100%" }} />
 </div>
 
 
 <div style={styles.background}>
-
       <div style={styles.container}>
         <h2 style={styles.heading}>Sign Up</h2>
         <form style={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +86,6 @@ const SignUp = () => {
               <p style={styles.error}>{errors.phoneNumber.message}</p>
             )}
           </div>
-          {/* <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link> */}
 
 
 
@@ -160,42 +151,24 @@ const SignUp = () => {
               <p style={styles.error}>{errors.country.message}</p>
             )}
           </div>
+   
+          
+
           
         </form>
         <button style={styles.button} type="submit" onClick={handleSubmit(onSubmit)}>
             Sign Up
           </button>
-          <div style={styles.SignUpText} >
-          Already have an account?  <Link to="/signin" style={{textDecoration: "none",color:"black"}}>Signin</Link> 
-                    </div>
       </div>
-
-      
-   
     </div>
 
 
     <footer style={styles.footer}>
-  <p style={styles.footerText}>© 2024 My Website. All rights reserved.</p>
-  <p style={styles.footerText}>
-    <a href="/privacy-policy" style={styles.link}>Privacy Policy</a> | 
-    <a href="/terms" style={styles.link}>Terms of Service</a>
-  </p>
-  <div style={styles.socialIcons}>
-    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-linkedin" style={styles.icon}></i>
-    </a>
-    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-facebook" style={styles.icon}></i>
-    </a>
-    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-twitter" style={styles.icon}></i>
-    </a>
-    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-youtube" style={styles.icon}></i>
-    </a>
-  </div>
-</footer>
+        <p style={styles.footerText}>© 2024 My Website. All rights reserved.</p>
+        <p style={styles.footerText}>
+          <a href="/privacy-policy" style={styles.link}>Privacy Policy</a> | <a href="/terms" style={styles.link}>Terms of Service</a>
+        </p>
+      </footer>
 
 
           </div>
@@ -205,9 +178,9 @@ const SignUp = () => {
 
 const styles = {
   container: {
-    maxWidth: "900px",
+    maxWidth: "840px",
     margin: "100px auto 100px auto",
-    marginLeft: "1400px",
+    marginLeft: "1200px",
     padding: "20px",
     border: "1px solid #c14400",
     borderRadius: "8px",
@@ -297,34 +270,6 @@ const styles = {
     color: "#ff7f00",
     textDecoration: "none",
     margin: "0 10px",
-  },
-  socialIcons: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "10px",
-  },
-  icon: {
-    fontSize: "24px",
-    color: "#ffffff",
-    margin: "0 10px",
-    transition: "color 0.3s",
-    cursor: "pointer",
-  },
-  iconHover: {
-    color: "#fff",
-  },
-  responsiveImage: {
-    width: "100%", // اجعل العرض 100% من العنصر الحاوي
-    height: "auto", // اجعل الارتفاع يتكيف تلقائيًا مع العرض للحفاظ على النسب
-    maxHeight: "100vh", // حد أقصى للارتفاع ليكون داخل الشاشة
-    objectFit: "cover", // الحفاظ على ملء الصورة مع قطع الحواف إذا لزم الأمر
-    display: "block",
-  },
-  SignUpText: {
-    color: "#c14400",
-    fontWeight: "bold",
-    marginTop: "20px",
-    textDecoration: "none"
   },
 };
 

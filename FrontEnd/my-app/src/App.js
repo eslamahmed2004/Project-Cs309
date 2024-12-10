@@ -1,37 +1,13 @@
-// import logo from './logo.svg';
-import React from 'react';
-import './App.css';
-import Signin from './pages/Signin/Signin';
-import Sginup from "./pages/Signup/Sginup.jsx";
-
-
-
-
-
-
-import{
-  BrowserRouter as Router,
-  Route,
-  Routes
-} from 'react-router-dom';
-
-
+import { BrowserRouter as Router,  Routes } from "react-router-dom";
+import {Main} from "./pages/Main/Main.jsx";
 
 function App() {
   return (
-    <div className="App">
-
-    <Router basename={process.env.PUBLIC_URL}>
-    <Routes>
-    <Route path="/signin" element={<Signin/>}/>
-      <Route path="/signup" element={<Sginup/>}/>
+    <Router>
+     <Main/>
+      <Routes>
       </Routes>
-      </Router>
-      
-      
-
-
-    </div>
+    </Router>
   );
 }
 
