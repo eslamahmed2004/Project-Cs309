@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 
@@ -162,14 +164,27 @@ const SignUp = () => {
       </div>
     </div>
 
-
     <footer style={styles.footer}>
-        <p style={styles.footerText}>© 2024 My Website. All rights reserved.</p>
-        <p style={styles.footerText}>
-          <a href="/privacy-policy" style={styles.link}>Privacy Policy</a> | <a href="/terms" style={styles.link}>Terms of Service</a>
-        </p>
-      </footer>
-
+  <p style={styles.footerText}>© 2024 My Website. All rights reserved.</p>
+  <p style={styles.footerText}>
+    <a href="/privacy-policy" style={styles.link}>Privacy Policy</a> | 
+    <a href="/terms" style={styles.link}>Terms of Service</a>
+  </p>
+  <div style={styles.socialIcons}>
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-linkedin" style={styles.icon}></i>
+    </a>
+    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-facebook" style={styles.icon}></i>
+    </a>
+    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-twitter" style={styles.icon}></i>
+    </a>
+    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-youtube" style={styles.icon}></i>
+    </a>
+  </div>
+</footer>
 
           </div>
 
@@ -270,6 +285,22 @@ const styles = {
     color: "#ff7f00",
     textDecoration: "none",
     margin: "0 10px",
+  },
+ 
+  socialIcons: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "10px",
+  },
+  icon: {
+    fontSize: "24px",
+    color: "#ffffff",
+    margin: "0 10px",
+    transition: "color 0.3s",
+    cursor: "pointer",
+  },
+  iconHover: {
+    color: "#fff",
   },
 };
 
