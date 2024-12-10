@@ -1,10 +1,9 @@
 // import logo from './logo.svg';
 import React from 'react';
 import './App.css';
-// import SignUp from './pages/Signup/Sginup';
 import Signin from './pages/Signin/Signin';
-import Sginup from "./pages/Signup/Sginup.jsx";
-// import Reset from "./pages/Reset-Pass/Reset.jsx";
+import Signup from "./pages/Signup/Sginup.jsx";
+import Main from "./pages/Main/Main";
 
 
 
@@ -26,7 +25,9 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
     <Routes>
     <Route path="/signin" element={<Signin/>}/>
-      <Route path="/signup" element={<Sginup/>}/>
+      <Route path="/signup" element={<Signup/>}/>
+      <Route path="/" element={<Main/>}/>
+
       </Routes>
       </Router>
       
