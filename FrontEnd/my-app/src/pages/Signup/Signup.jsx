@@ -28,7 +28,7 @@ const SignUp = () => {
   return (
     <div>
 <div style={styles.background}>
-  <img src="/wallpaper.jpg" alt="Background"     style={styles.responsiveImage}
+  <img src="/wallpaper.jpg" alt="Background"  style={styles.responsiveImage}
  />
 </div>
 
