@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Food = () => {
   return (
     <div className="container" style={styles.container}>
-      <Link style={styles.Link}>
+      <Link to="/restaurant" style={styles.Link}>
         <div style={styles.box}>
           <h1 style={styles.H1}>اطلب الطعام</h1>
           <svg xmlns="http://www.w3.org/2000/svg" width="150" height="40" viewBox="0 0 200 50">

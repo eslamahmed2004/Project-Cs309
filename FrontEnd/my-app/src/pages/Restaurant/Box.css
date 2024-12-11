@@ -1,0 +1,50 @@
+.card-box-container {
+    display: flex;
+    flex-wrap: wrap; /* السماح للعناصر بالتفاف في حال عدم وجود مساحة كافية */
+    gap: 1rem; /* المسافة بين العناصر */
+    justify-content: center; /* توزيع العناصر في منتصف الحاوية */
+    padding: 20px;
+}
+
+.card {
+    width: 400px; /* عرض ثابت لكل بوكس */
+    height: 400px; /* تحديد ارتفاع ثابت لضمان تناسق البوكسات */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #fff;
+}
+
+.card-img-top {
+    width: 200px; /* ضبط الصورة لتتناسب مع عرض البوكس */
+    height: 200px; /* تحديد ارتفاع الصورة */
+    object-fit: cover; /* الحفاظ على تناسق الصورة داخل البوكس */
+    border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #555;
+}
+
+.btn {
+    background-color: #ff5100;
+    color: #fff;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
