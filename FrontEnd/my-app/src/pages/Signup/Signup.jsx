@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
@@ -26,7 +28,8 @@ const SignUp = () => {
   return (
     <div>
 <div style={styles.background}>
-  <img src="/wallpaper.jpg" alt="Background" style={{ maxWidth: "100%" }} />
+  <img src="/wallpaper.jpg" alt="Background"     style={styles.responsiveImage}
+ />
 </div>
 
 
@@ -161,6 +164,9 @@ const SignUp = () => {
         <button style={styles.button} type="submit" onClick={handleSubmit(onSubmit)}>
             Sign Up
           </button>
+          <div style={styles.SignUpText} >
+          Already have an account?  <Link to="/signin" style={{textDecoration: "none",color:"black"}}>Signin</Link> 
+                    </div>
       </div>
     </div>
 
@@ -301,6 +307,19 @@ const styles = {
   },
   iconHover: {
     color: "#fff",
+  },
+  responsiveImage: {
+    width: "100%", // اجعل العرض 100% من العنصر الحاوي
+    height: "auto", // اجعل الارتفاع يتكيف تلقائيًا مع العرض للحفاظ على النسب
+    maxHeight: "100vh", // حد أقصى للارتفاع ليكون داخل الشاشة
+    objectFit: "cover", // الحفاظ على ملء الصورة مع قطع الحواف إذا لزم الأمر
+    display: "block",
+  },
+  SignUpText: {
+    color: "#c14400",
+    fontWeight: "bold",
+    marginTop: "20px",
+    textDecoration: "none"
   },
 };
 

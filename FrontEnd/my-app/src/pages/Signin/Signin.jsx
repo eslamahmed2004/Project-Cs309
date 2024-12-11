@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form"; // استيراد مكتبة React Hook Form
 import { Link } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+// import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+
 
 
 
@@ -27,7 +29,8 @@ const SignIn = () => {
   // دالة لإغلاق النافذة
   const closePopup = () => {
     setIsOpen(false);
-  };
+  }; 
+
 
   return (
     <div>
@@ -137,6 +140,7 @@ const SignIn = () => {
       <i className="fab fa-youtube" style={styles.icon}></i>
     </a>
   </div>
+  
 </footer>
 
     </div>
