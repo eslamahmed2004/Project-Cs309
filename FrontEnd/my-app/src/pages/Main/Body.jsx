@@ -17,7 +17,7 @@ const Food = () => {
         </div>
       </Link>
 
-      <Link style={styles.Link}>
+      <Link to="/drink" style={styles.Link}>
         <div style={styles.box}>
           <h1 style={styles.H1}> اطلب التسالي </h1>
           <svg xmlns="http://www.w3.org/2000/svg" width="150" height="40" viewBox="0 0 200 50">
@@ -30,7 +30,7 @@ const Food = () => {
         </div>
       </Link>
 
-      <Link style={styles.Link}>
+      <Link to="/medicine" style={styles.Link}>
         <div style={styles.box}>
           <h1 style={styles.H1}> اطلب الدواء </h1>
           <svg xmlns="http://www.w3.org/2000/svg" width="150" height="40" viewBox="0 0 200 50">
