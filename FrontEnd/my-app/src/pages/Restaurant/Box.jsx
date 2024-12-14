@@ -1,5 +1,5 @@
 import React from 'react';
-import { Foodres } from "../Food/Foodres";
+import { Foodres } from "../Show/Foodres";
 import { Link } from "react-router-dom";
 import "./Box.css"
 
