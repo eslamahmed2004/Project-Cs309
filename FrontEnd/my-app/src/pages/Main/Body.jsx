@@ -17,7 +17,6 @@ const Food = () => {
       </Link>
 
       <Link style={styles.Link}>
-        
         <div style={styles.box}>
         <img src="/wallpaperflare.com_wallpaper(4).jpg" alt="icon" style={styles.icon} />
           <h1 style={styles.H1}>Order Snacks</h1>
@@ -28,7 +27,7 @@ const Food = () => {
         </div>
       </Link>
 
-      <Link style={styles.Link}>
+      <Link to="/medicine" style={styles.Link}>
         <div style={styles.box}>
           <img src="/wallpaperflare.com_wallpaper(5).jpg" alt="icon" style={styles.icon} />
           <h1 style={styles.H1}>Order Medicin</h1>
