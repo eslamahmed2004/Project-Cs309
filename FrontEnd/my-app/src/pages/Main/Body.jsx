@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 const Food = () => {
   return (
     <div className="container" style={styles.container}>
       <Link to="/restaurant" style={styles.Link}>
         <div style={styles.box}>
-        <img src="/wallpaperflare.com_wallpaper(3).jpg" alt="icon" style={styles.icon} />
-
+          <img src="/wallpaperflare.com_wallpaper(3).jpg" alt="icon" style={styles.icon} />
           <h1 style={styles.H1}>Order Food</h1>
           <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
           <p style={styles.Body}>
@@ -16,14 +15,9 @@ const Food = () => {
         </div>
       </Link>
 
-<<<<<<<<< Temporary merge branch 1
       <Link to="/drink" style={styles.Link}>
-=========
-      <Link style={styles.Link}>
-        
->>>>>>>>> Temporary merge branch 2
         <div style={styles.box}>
-        <img src="/wallpaperflare.com_wallpaper(4).jpg" alt="icon" style={styles.icon} />
+          <img src="/wallpaperflare.com_wallpaper(4).jpg" alt="icon" style={styles.icon} />
           <h1 style={styles.H1}>Order Snacks</h1>
           <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
           <p style={styles.Body}>
@@ -45,7 +39,6 @@ const Food = () => {
     </div>
   );
 };
-
 const styles = {
   container: {
     display: "flex",
@@ -123,4 +116,3 @@ const styles = {
 
 
 export default Food;
-

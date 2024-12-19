@@ -6,15 +6,8 @@ import Signup from "./pages/Signup/Signup.jsx";
 import Main from "./pages/Main/Main";
 import Detalis from "./pages/AddCart/Details.jsx";
 import Restaurant from "./pages/Restaurant/Restaurant.jsx";
-<<<<<<<<< Temporary merge branch 1
 import Drink from './pages/Drinks/Drink.jsx';
 import Medicine from './pages/Medicine/Medicine.jsx';
-
-=========
-import Details from "./pages/AddCart/Details.jsx"
->>>>>>>>> Temporary merge branch 2
-
-
 
 
 
@@ -37,9 +30,7 @@ function App() {
     <Route path="/medicine" element={<Medicine/>}/>
 
     <Route path="/drink" element={<Drink/>}/>
-=========
->>>>>>>>> Temporary merge branch 2
-    <Route path="/signin" element={<Signin/>}/>
+      <Route path="/signin" element={<Signin/>}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/" element={<Main/>}/>
       <Route path="/AddCart" element={<Detalis/>}/>
