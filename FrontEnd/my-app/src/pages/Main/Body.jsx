@@ -16,7 +16,12 @@ const Food = () => {
         </div>
       </Link>
 
-      <Link to="/Drinks" style={styles.Link}>
+<<<<<<<<< Temporary merge branch 1
+      <Link to="/drink" style={styles.Link}>
+=========
+      <Link style={styles.Link}>
+        
+>>>>>>>>> Temporary merge branch 2
         <div style={styles.box}>
         <img src="/wallpaperflare.com_wallpaper(4).jpg" alt="icon" style={styles.icon} />
           <h1 style={styles.H1}>Order Snacks</h1>
