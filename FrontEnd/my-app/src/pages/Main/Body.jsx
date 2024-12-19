@@ -41,65 +41,57 @@ const Food = () => {
 };
 const styles = {
   container: {
-    display: "flex",
-    flexWrap: " wrap", // ترتيب المربعات في عدة أسطر عند الحاجة
-    justifyContent: "center", // توسيط العناصر داخل الحاوية
-    alignItems: "stretch", // التأكد من أن جميع المربعات تأخذ نفس الارتفاع
-    gap: "20px", // مسافة ثابتة بين المربعات
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+    gap: "20px",
     margin: "20px auto",
     padding: "0 10px",
   },
   box: {
-    flex: "1 1 calc(33.333% - 40px)", // حجم المربع يكون ثلث العرض
-    maxWidth: "450px", // عرض المربع الأقصى
-    minHeight: "400px", // الحد الأدنى لارتفاع المربع
+    position: "relative", // يضمن أن النصوص والصورة يمكن التحكم في وضعها داخل الصندوق
+    height: "600px", // ارتفاع ثابت للمربع
     backgroundColor: "#ff7e5f",
     color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: "20px",
     borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    position: "relative",
     overflow: "hidden",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     transition: "transform 0.3s ease-in-out",
   },
   icon: {
-    position: "absolute",
+    position: "absolute", // يسمح للصورة بشغل كامل مساحة المربع
     top: "0",
     left: "0",
     width: "100%",
     height: "100%",
-    objectFit: "cover",
-    zIndex: "0",
+    objectFit: "cover", // يجعل الصورة تغطي المربع بشكل كامل دون تشويه
+    zIndex: "0", // يجعل الصورة في الخلفية
+  },
+  H1: {
+    position: "relative", // يبقي النص فوق الصورة
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    color: "rgba(0, 0, 0, 0.8)",
+    margin: "20px",
+    zIndex: "1", // يضمن بقاء النص فوق الصورة
+  },
+  Body: {
+    position: "relative", // يبقي النص فوق الصورة
+    fontSize: "1rem",
+    color: "rgba(255, 255, 255, 0.8)",
+    marginTop: "10px",
+    zIndex: "1", // يضمن بقاء النص فوق الصورة
   },
   orderIcon: {
     position: "absolute",
-    bottom: "30px",
+    bottom: "20px",
     right: "20px",
-    width: "100px",
-    height: "80px",
-    zIndex: "1",
-  },
-  H1: {
-    fontSize: "50px",
-    fontWeight: "bold",
-    color: "rgba(0,0,0,0.8)",
-    margin: "0",
-    zIndex: "0",
-  },
-  Body: {
-    fontSize: "40px",
-    color: "rgba(255,255,255,0.8)",
-    zIndex: "0",
-    marginTop: "10px",
+    width: "70px",
+    height: "70px",
+    zIndex: "2", // فوق الصورة لكن تحت النصوص الأخرى
   },
   Link: {
     textDecoration: "none",
   },
-
   // استجابة للشاشات الصغيرة
   "@media (max-width: 768px)": {
     container: {
