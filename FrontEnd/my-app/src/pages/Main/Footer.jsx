@@ -36,9 +36,6 @@ const Footer = ()=>{
       </ul>
     </div>
 
-
-
-
     <div class="footer-section">
       <h3>Popular Cuisines</h3>
       <ul>

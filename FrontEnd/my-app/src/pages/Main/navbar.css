@@ -1,53 +1,71 @@
-/* تصميم الـ Navbar */
 .navbar {
   width: 100%;
-    height: 120px; /* تعيين ارتفاع ثابت */
-    display: flex; 
-    justify-content: space-between; /* توزيع العناصر بين الطرفين */
-    align-items: center; /* توسيط العناصر عموديًا */
-  background-color: #f87800; /* لون الخلفية */
-  padding: 0 20px; /* حشوات أفقية فقط */
+  height: 120px;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f87800;
+  padding: 0 20px;
   box-sizing: border-box;
   top: 0;
   z-index: 1000;
   overflow: hidden;
 }
 
-/* الروابط داخل الـ Navbar */
 .navbar a {
-  display: block; /* جعل كل رابط يظهر ككتلة */
-  color: #030303; /* لون النص */
-  text-align: center; /* محاذاة النص */
-  padding: 8px 16px; /* مسافة داخلية */
-  text-decoration: none; /* إزالة الخط السفلي */
-  border-radius: 8px; /* زوايا مستديرة */
-  transition: all 0.3s ease; /* تأثير التمرير */
+  display: block;
+  color: #030303;
+  text-align: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-/* تأثير التمرير على الروابط */
 .navbar a:hover {
-  background-color: #000; /* لون الخلفية عند التمرير */
-  color: #fff; /* لون النص عند التمرير */
+  background-color: #000;
+  color: #fff;
 }
 
-/* تنسيق الروابط داخل الـ Navbar */
 .navbar .navbar-links {
-  display: flex; /* جعل الروابط تظهر بجانب بعضها */
-  align-items: center; /* محاذاة العناصر عموديًا */
-  gap: 20px; /* تباعد بين العناصر */
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-/* تنسيق اسم الموقع */
 .navbar .name {
-  font-size: 36px; /* حجم النص */
-  font-weight: bold; /* النص بخط عريض */
-  color: #030303; /* لون النص */
-  font-family: 'Arial', sans-serif; /* نوع الخط */
+  font-size: 36px;
+  font-weight: bold;
+  color: #030303;
+  font-family: 'Arial', sans-serif;
 }
 
-.navbar-links .icon{
+.navbar-links .icon {
   width: 40px;
-  transform: translateX(-25px);
-  position: absolute;    
-  top: 35px;
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  right: 0.5%;
+  transform: translateX(0);
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-links .icon {
+    right: 0;
+    top: 10px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .navbar-links .icon {
+    right: calc(1%);
+    top: 15px;
+  }
+}
+
+.navbar-links .icon:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #000;
+  border-radius: 30%;
 }

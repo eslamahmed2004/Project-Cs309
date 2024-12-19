@@ -16,7 +16,7 @@ const Food = () => {
         </div>
       </Link>
 
-      <Link style={styles.Link}>
+      <Link to="/Drinks" style={styles.Link}>
         <div style={styles.box}>
         <img src="/wallpaperflare.com_wallpaper(4).jpg" alt="icon" style={styles.icon} />
           <h1 style={styles.H1}>Order Snacks</h1>
@@ -44,7 +44,7 @@ const Food = () => {
 const styles = {
   container: {
     display: "flex",
-    flexWrap: "wrap", // ترتيب المربعات في عدة أسطر عند الحاجة
+    flexWrap: " wrap", // ترتيب المربعات في عدة أسطر عند الحاجة
     justifyContent: "center", // توسيط العناصر داخل الحاوية
     alignItems: "stretch", // التأكد من أن جميع المربعات تأخذ نفس الارتفاع
     gap: "20px", // مسافة ثابتة بين المربعات
