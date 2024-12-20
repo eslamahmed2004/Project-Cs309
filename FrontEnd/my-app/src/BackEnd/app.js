@@ -2,10 +2,15 @@ const express = require("express")
 const mongoose = require('mongoose')
 const User = require('./models/user.model')
 const Payment = require('./models/payment.model')
+const Restaurant = require('./models/restaurant');
+const MenuItem = require('./models/menu'); 
+const Order = require('./models/orders'); 
+const Cart = require('./models/cart'); 
 const bcrypt = require('bcrypt');
 const mongouri = "mongodb://localhost:27017/lab1db"
 // app service 
 const app = express()
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -125,13 +130,110 @@ app.post('/user/addPayment', async (req, res) => {
 
 
 
+
+// Create Restaurant
+app.post('/restaurants', async (req, res) => {
+    const { name, description, address, logo, ownerId } = req.body;
+    try {
+        const restaurant = new Restaurant({ name, description, address, logo, ownerId });
+        await restaurant.save();
+        res.status(201).json(restaurant);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Get All Restaurants
+app.get('/restaurants', async (req, res) => {
+    try {
+        const restaurants = await Restaurant.find();
+        res.status(200).json(restaurants);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Add Menu Item
+app.post('/menu-items', async (req, res) => {
+    const { restaurantId, name, description, price, category, image, availability } = req.body;
+    try {
+        const menuItem = new MenuItem({ restaurantId, name, description, price, category, image, availability });
+        await menuItem.save();
+        res.status(201).json(menuItem);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Get Menu Items by Restaurant
+app.get('/menu-items/:restaurantId', async (req, res) => {
+    const { restaurantId } = req.params;
+    try {
+        const menuItems = await MenuItem.find({ restaurantId });
+        res.status(200).json(menuItems);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Place Order
+app.post('/orders', async (req, res) => {
+    const { userId, restaurantId, items, totalPrice } = req.body;
+    try {
+        const order = new Order({ userId, restaurantId, items, totalPrice });
+        await order.save();
+        res.status(201).json(order);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Get User Orders
+app.get('/orders/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const orders = await Order.find({ userId });
+        res.status(200).json(orders);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Add to Cart
+app.post('/cart', async (req, res) => {
+    const { userId, restaurantId, items, totalPrice } = req.body;
+    try {
+        const cart = new Cart({ userId, restaurantId, items, totalPrice });
+        await cart.save();
+        res.status(201).json(cart);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Get Cart by User
+app.get('/cart/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const cart = await Cart.findOne({ userId });
+        res.status(200).json(cart);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+/**  ----------------------------- START SERVER ----------------------------- **/
+
+// Elkot elkot2227271
+// Hazem hazem2227378
+
+const port = 5000 ;
 mongoose.set("strictQuery", false)
-mongoose
-.connect('mongodb://127.0.0.1:27017/lab2db')
+mongoose.connect("mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk")
 .then(() => {
     console.log('connected to MongoDB')
     //listen on specific port 
-    app.listen(8000, () => console.log('app started on port 8000'))
+    app.listen(port, () => console.log(`listening at http://localhost:${port}`))
 }).catch((error) => {
-    console.log('cant connect to mongodb'+error)
+    console.log('can not connect to mongodb  '+error)
 })

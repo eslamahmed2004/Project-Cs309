@@ -10,10 +10,16 @@ const Navbar = () => {
         </div>
       <div className="navbar-links">
         <div>
+          <Link to="./ProfileData">Profile Data</Link>
+        </div>
+        <div>
           <Link to="./signup">Sign Up</Link> 
         </div>
         <div>
           <Link to="./signin">sgin In</Link>
+        </div>
+        <div>
+          <Link to="./AddCart"><img src="icon.png" alt="icon" className="icon" /></Link>
         </div>
       </div>
     </nav>
