@@ -8,6 +8,7 @@ import Detalis from "./pages/AddCart/Details.jsx";
 import Restaurant from "./pages/Restaurant/Restaurant.jsx";
 import Drink from './pages/Drinks/Drink.jsx';
 import Medicine from './pages/Medicine/Medicine.jsx';
+import ProfileData from './pages/ProfileData/ProfileData.jsx';
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/" element={<Main/>}/>
       <Route path="/AddCart" element={<Detalis/>}/>
+      <Route path="/ProfileData" element={<ProfileData/>}/>
       </Routes>
       </Router>
     </div>
