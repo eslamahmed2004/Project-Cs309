@@ -1,116 +1,231 @@
-.navbar2 {
-  background-color: #fae8ce;
-  width: 100%;
-  height: 120px; /* تعيين ارتفاع ثابت */
-  display: flex; 
-  justify-content: space-between; /* توزيع العناصر بين الطرفين */
-  align-items: center; /* توسيط العناصر عموديًا */
-  padding: 0 20px; /* حشوات أفقية فقط */
-  box-sizing: border-box;
-  top: 0;
-  z-index: 1000;
-  overflow: hidden;
+/* ضبط صفحة كاملة */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* يجعل ارتفاع الصفحة 100% من ارتفاع النافذة */
+  margin: 0;
 }
 
+/* المحتوى الرئيسي */
+.main-content {
+  flex: 1; /* يجعل المحتوى الرئيسي يمتد ليملأ الفراغ بين الهيدر والفوتر */
+}
+
+/* الفوتر */
+.footer {
+  background-color: #262626;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  padding: 20px 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+  position: relative;  /* تأكد من أن الفوتر يظل في الأسفل */
+}
+
+/* Navbar Styling */
+.navbar2 {
+background-color: #fae8ce;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 50px 50px;
+box-sizing: border-box;
+height: 50px;
+width: 100%;
+position: relative;
+z-index: 0;
+}
+
+/* Icon Styling */
+.icon {
+height: 70px;
+width: auto;
+}
+
+/* Button Styles */
+.buttonLan, .buttonflag {
+display: flex;
+align-items: center;
+padding: 20px 20px;
+background-color: #fff;
+border: 1px solid #000000;
+border-radius: 50px;
+cursor: pointer;
+font-size: 14px;
+transition: background-color 0.3s ease;
+}
+
+.buttonLan:hover, .buttonflag:hover {
+background-color: #ddd;
+}
+
+/* Icon Inside Buttons */
+.iconglo, .iconegy {
+display: flex;
+flex-wrap: wrap;
+height: 17px;
+width: 55%;
+margin-left: 8px;
+}
+
+/* Profile and Sidebar Styling */
 .profile-container {
-  width: 400px;
-  margin: 20px auto;
-  padding: 20px;
+  flex: 1;
+  min-width: 280px;
+  margin: 10px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.profile-data{
+  height: 560px;
 }
 
 label {
-  display: block;
-  margin: 10px 0 5px;
+display: block;
+margin: 100px 0 5px;
 }
 
 input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+width: 100%;
+padding: 8px;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-sizing: border-box;
 }
 
 button {
-  margin-right: 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #000000;
-  color: #fff;
-  cursor: pointer;
+width: 1x;
+min-width: 12px;
+margin: 10px;
+padding: 10px 15px;
+border: none;
+border-radius: 5px;
+background-color: #c4c3c3;
+color: #ed7c0b;
+cursor: pointer;
 }
 
 button:hover {
-  background-color: #090909;
+background-color: #f17c06;
+color: #fcfcfc;
 }
 
 button:last-child {
-  background-color: #6c757d;
+background-color: #b9b8b8;
 }
 
 button:last-child:hover {
-  background-color: #5a6268;
+background-color: #f17c06;
+color: #f1f1f1;
 }
 
 .profile-page {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-}
-
-.profile-container {
-  flex: 2;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: row-reverse;
+gap: 20px;
+padding: 15px;
+flex-wrap: wrap;
 }
 
 .sidebar {
-  flex: 1;
-  padding: 20px;
-  background-color: #f1f1f1;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+flex: 1;
+min-width: 250px;
+padding: 15px;
+background-color: #f1f1f1;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h3 {
-  margin-bottom: 15px;
+margin-bottom: 15px;
 }
 
 .sidebar ul {
-  list-style-type: none;
-  padding: 0;
+list-style-type: none;
 }
 
 .sidebar li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #555;
+margin-bottom: 10px;
+font-size: 16px;
+color: #555;
 }
 
-/* تنسيق الأزرار "Previous Addresses" و "Previous Orders" */
 .sidebar button {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  background-color: #050505; /* لون الأزرق */
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+width: 100%;
+padding: 12px;
+margin-bottom: 10px;
+background-color: #d1cece;
+color: #f17c06;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: background-color 0.3s ease;
 }
 
 .sidebar button:hover {
-  background-color: #ff9501; /* لون الأزرق الداكن عند المرور */
+background-color: #ff9501;
+color: #fffcfc;
 }
 
 .sidebar button:focus {
-  outline: none;
+outline: none;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+.profile-page {
+  flex-direction: column;
+}
+
+.profile-container,
+.sidebar {
+  width: 100%;
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.navbar2 {
+  padding: 10px;
+  flex-direction: column;
+}
+
+.buttonLan, .buttonflag {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+}
+}
+
+@media screen and (max-width: 480px) {
+.navbar2 {
+  padding: 5px 10px;
+}
+
+.profile-container,
+.sidebar {
+  padding: 10px;
+}
+
+input {
+  padding: 6px;
+}
+
+.sidebar button {
+  font-size: 14px;
+  padding: 8px;
+}
+
+.footer {
+  font-size: 12px;
+}
 }

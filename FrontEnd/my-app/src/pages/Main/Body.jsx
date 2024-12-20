@@ -50,6 +50,7 @@ const styles = {
   box: {
     position: "relative", // يضمن أن النصوص والصورة يمكن التحكم في وضعها داخل الصندوق
     height: "600px", // ارتفاع ثابت للمربع
+    width: "250px", // عرض ث
     backgroundColor: "#ff7e5f",
     color: "#fff",
     borderRadius: "10px",
