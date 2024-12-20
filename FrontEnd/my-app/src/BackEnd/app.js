@@ -7,6 +7,8 @@ const MenuItem = require('./models/menu');
 const Order = require('./models/orders'); 
 const Cart = require('./models/cart'); 
 const bcrypt = require('bcrypt');
+const Product  = require('../models/product.model')
+
 const mongouri = "mongodb://localhost:27017/lab1db"
 // app service 
 const app = express()
@@ -33,7 +35,6 @@ app.get('/user/:id', async (req, res) => {
     try {
         const id = req.params.id;
         
-        // validate ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Invalid user ID format" });
         }
@@ -51,28 +52,31 @@ app.get('/user/:id', async (req, res) => {
 
 
 
-app.post('/register',  async (req, res) => {
+app.post('/register', async (req, res) => {
 
+    const { email, password, fullName, phoneNumber, address, image } = req.body;
 
-    try{
-        let userParam = req.body;
-        if (await User.findOne({ email: userParam.email })) {
-            res.send( 'email "' + userParam.email + '" is already exist');
+    try {
+        if (await User.findOne({ email })) {
+            return res.status(400).send(`email "${email}" is already exist`);
         }
-        const user = new User(userParam);
-        const bcrypt = require('bcrypt');
-        const saltRounds = 10;
-        userParam.password = await bcrypt.hash(userParam.password, saltRounds);
-        // save user
-         await user.save();
-         res.send("user added successfully ")
 
-    }catch(err)
-    {
-        res.status(500).send('server error: '+ err);
+        const user = new User({ email, password, fullName, phoneNumber, address, image });
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user.password = hashedPassword;
+
+        await user.save();
+
+        res.send(`user "${email}" added successfully`);
+
+    } catch (err) {
+        res.status(500).send(`server error: ${err}`);
     }
-    
 });
+
 
 app.post('/user/login', async (req, res) => {
     try {
@@ -80,9 +84,10 @@ app.post('/user/login', async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(404).send('user not found');
+            return res.status(404).send('User not found');
         }
-        const isMatch = await password === user.password;
+
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).send('Invalid credentials');
         }
@@ -221,6 +226,74 @@ app.get('/cart/:userId', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+const Product  = require('../models/product.model')
+
+
+//CREATE
+
+app.post("/add",  async (req, res) => {
+  const newProduct = new Product(req.body);
+
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UPDATE
+app.put("/:id", async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//DELETE
+app.delete("/:id",  async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("Product has been deleted...");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET PRODUCT
+app.get("/find/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET ALL PRODUCTS
+app.get("/", async (req, res) => {
+
+    try {
+        const products = await Product.find({ });
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    } 
+  });
+
+
+
+
+
 
 /**  ----------------------------- START SERVER ----------------------------- **/
 
