@@ -1,50 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import Box from "./Box";
-import"./Restaurant.css"
+import React from "react"
 import "./Footer.css"
 
 
 
-
-const Restaurant = ()=>{
-
-    
-
-
+const Footer = ()=>{
     return(
-        <div>
-            <navbar className="navbar2">
-                <Link to="/">
-                <img src="./home.png" alt="icon"  className="icon"/>   </Link>
-             <button className="buttonLan"> AR <img src="./globe.png" alt="icon" className="iconglo"/></button>
-             <button className="buttonflag"> <img src="./egypt.png" alt="icon" className="iconegy"/>   </button>
-             <button className="buttonperson"><Link to="/ProfileData"> <img src="./user.png" alt="icon" className="iconegy"/> </Link>  </button>
-            </navbar>
-
-            <section className="section"> 
-            All Restaurants
-            </section>
-
-            <div style={styles.searchContainer}><Link>
-      <FaSearch style={styles.searchIcon} /></Link>
-      <input
-        type="text"
-        placeholder="Search Restaurant"
-        style={styles.searchInput}
-      />
-    </div>
-  
-    <div >
-   <Box/>
-</div>
 <footer class="footer">
-
-
-
-
-
   <div class="footer-top">
     <div class="footer-links">
       <a href="#">Corporate</a>
@@ -74,9 +35,6 @@ const Restaurant = ()=>{
         <li><a href="#">More Restaurants...</a></li>
       </ul>
     </div>
-
-
-
 
     <div class="footer-section">
       <h3>Popular Cuisines</h3>
@@ -144,7 +102,7 @@ const Restaurant = ()=>{
 </div>
 
   <div class="footer-bottom">
-    <p>©2024 Talabat.com</p>
+    <p>©2024 Talabatk.com</p>
     
         
   </div>
@@ -153,37 +111,7 @@ const Restaurant = ()=>{
 
 
 </footer>
-
-  </div>
-        
-    )
-
-
+);
 }
 
-
-const styles = {
-    searchContainer: {
-      position: "relative",
-      marginTop: "100px",
-      marginLeft: "1550px",
-      width: "300px",
-    },
-    searchIcon: {
-      position: "absolute",
-      top: "50%",
-      right: "-30px",
-      transform: "translateY(-50%)",
-      color: "#888",
-      fontSize: "16px",
-    },
-    searchInput: {
-      width: "100%",
-      padding: "10px 10px 10px 35px",
-      border: "1px solid #ccc",
-      borderRadius: "5px",
-      fontSize: "16px",
-    },
-  }
-
-export default Restaurant;
+export default Footer;
