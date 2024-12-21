@@ -2,25 +2,20 @@ const express = require("express")
 const mongoose = require('mongoose')
 const User = require('./models/user.model')
 const Payment = require('./models/payment.model')
-const Restaurant = require('./models/restaurant');
-const MenuItem = require('./models/menu'); 
-const Order = require('./models/orders'); 
-const Cart = require('./models/cart'); 
 const bcrypt = require('bcrypt');
 const cors = require('cors');  // إضافة مكتبة CORS
 const mongouri = "mongodb://localhost:27017/lab1db"
 // app service 
 const app = express()
 
+
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 app.use(cors({
     origin: 'http://localhost:3000', // السماح بمصدر React
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true // إذا كنت تستخدم الـ Cookies
 }));
-
-
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
 
 
 app.get('/', (req, res) => {
@@ -167,9 +162,9 @@ app.post('/user/addPayment', async (req, res) => {
 
 // Create Restaurant
 app.post('/restaurants', async (req, res) => {
-    const { title, description, address, logo, ownerId } = req.body;
+    const { name, description, address, logo, ownerId } = req.body;
     try {
-        const restaurant = new Restaurant({ title, description, address, logo, ownerId });
+        const restaurant = new Restaurant({ name, description, address, logo, ownerId });
         await restaurant.save();
         res.status(201).json(restaurant);
     } catch (error) {
@@ -263,11 +258,12 @@ app.get('/cart/:userId', async (req, res) => {
 
 const port = 5000 ;
 mongoose.set("strictQuery", false)
-mongoose.connect("mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk")
+mongoose
+.connect('mongodb://127.0.0.1:27017/lab2db')
 .then(() => {
     console.log('connected to MongoDB')
     //listen on specific port 
-    app.listen(port, () => console.log(`listening at http://localhost:${port}`))
+    app.listen(8000, () => console.log('app started on port 8000'))
 }).catch((error) => {
-    console.log('can not connect to mongodb  '+error)
+    console.log('cant connect to mongodb'+error)
 })

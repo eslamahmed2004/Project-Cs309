@@ -89,6 +89,7 @@ const ProfileData = () => {
                     <img src="./egypt.png" alt="icon" className="iconegy" />
                 </button>
             </navbar>
+
             <div className="profile-page">
                 <div className="profile-container">
                     {/* إظهار المحتوى حسب القسم النشط */}
@@ -141,7 +142,7 @@ const ProfileData = () => {
                                     <button onClick={handleCancel}>Cancel</button>
                                 </div>
                             ) : (
-                                <div>
+                                <div className="profile-data">
                                     <h2>Profile Data</h2>
                                     <p><strong>Name:</strong> {user.name}</p>
                                     <p><strong>Email:</strong> {user.email}</p>

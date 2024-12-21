@@ -38,9 +38,7 @@ const OrderDetails = ({ initialOrder }) => {
                 <button className="buttonflag">
                     <img src="./egypt.png" alt="icon" className="iconegy" />
                 </button>
-                <button className="buttonperson">
-                    <img src="./user.png" alt="icon" className="iconegy" />
-                </button>
+                <button className="buttonperson"><Link to="/ProfileData"> <img src="./user.png" alt="icon" className="iconegy" /> </Link>  </button>
             </navbar>
 
             {/* Container */}
@@ -59,7 +57,7 @@ const OrderDetails = ({ initialOrder }) => {
                     </ul>
                     <p>المجموع: {order.totalAmount} {order.currency}</p>
                 </div>
-                
+
                 <h3>منتجات للاختيار:</h3>
                 <div className="available-items">
                     {availableItems.map((item) => (
