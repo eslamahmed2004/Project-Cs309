@@ -1,3 +1,5 @@
+
+
 .navbar2 {
     background-color: #fae8ce;
     width: 100%;
@@ -10,6 +12,7 @@
     top: 0;
     z-index: 1000;
     overflow: hidden;
+    margin: auto;
 }
 
 

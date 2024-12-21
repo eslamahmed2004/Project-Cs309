@@ -7,9 +7,16 @@ const MenuItem = require('./models/menu');
 const Order = require('./models/orders'); 
 const Cart = require('./models/cart'); 
 const bcrypt = require('bcrypt');
+const cors = require('cors');  // إضافة مكتبة CORS
 const mongouri = "mongodb://localhost:27017/lab1db"
 // app service 
 const app = express()
+
+app.use(cors({
+    origin: 'http://localhost:3000', // السماح بمصدر React
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true // إذا كنت تستخدم الـ Cookies
+}));
 
 
 app.use(express.json())
@@ -51,28 +58,55 @@ app.get('/user/:id', async (req, res) => {
 
 
 
-app.post('/register',  async (req, res) => {
+app.post('/register', async (req, res) => {
+    try {
+        let { firstName, lastName, email, password, phoneNumber } = req.body;
+        console.log("Received data:", req.body); // إضافة Logging للبيانات
 
-
-    try{
-        let userParam = req.body;
-        if (await User.findOne({ email: userParam.email })) {
-            res.send( 'email "' + userParam.email + '" is already exist');
+        // تحقق من الحقول المطلوبة
+        if (!firstName || !lastName || !email || !password) {
+            return res.status(400).send({ message: "Missing required fields" });
         }
-        const user = new User(userParam);
-        const bcrypt = require('bcrypt');
-        const saltRounds = 10;
-        userParam.password = await bcrypt.hash(userParam.password, saltRounds);
-        // save user
-         await user.save();
-         res.send("user added successfully ")
 
-    }catch(err)
-    {
-        res.status(500).send('server error: '+ err);
+        // تحقق من صحة البريد الإلكتروني
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA0-9]{2,}$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).send({ message: "Invalid email format" });
+        }
+
+        // تحقق من وجود البريد الإلكتروني
+        if (await User.findOne({ email })) {
+            return res.status(400).send({ message: `Email "${email}" already exists` });
+        }
+
+        // تحقق من صحة رقم الهاتف (اختياريًا إذا كان موجودًا)
+        if (phoneNumber && !/^[0-9]{11}$/.test(phoneNumber)) {
+            return res.status(400).send({ message: "Phone number must be 11 digits" });
+        }
+
+        // تشفير كلمة السر
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        // إنشاء مستخدم جديد بدون تعيين id يدويًا
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+            phoneNumber: phoneNumber || null, // اختيارياً
+        });
+
+        await newUser.save();
+        res.status(201).send({ message: "User added successfully", userId: newUser._id });
+
+    } catch (err) {
+        console.error('Error:', err);  // Logging الخطأ
+        res.status(500).send({ message: 'Server error', error: err.message });
     }
-    
 });
+
+
 
 app.post('/user/login', async (req, res) => {
     try {
@@ -82,7 +116,7 @@ app.post('/user/login', async (req, res) => {
         if (!user) {
             return res.status(404).send('user not found');
         }
-        const isMatch = await password === user.password;
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).send('Invalid credentials');
         }
@@ -133,9 +167,9 @@ app.post('/user/addPayment', async (req, res) => {
 
 // Create Restaurant
 app.post('/restaurants', async (req, res) => {
-    const { name, description, address, logo, ownerId } = req.body;
+    const { title, description, address, logo, ownerId } = req.body;
     try {
-        const restaurant = new Restaurant({ name, description, address, logo, ownerId });
+        const restaurant = new Restaurant({ title, description, address, logo, ownerId });
         await restaurant.save();
         res.status(201).json(restaurant);
     } catch (error) {

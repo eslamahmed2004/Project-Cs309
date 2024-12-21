@@ -1,0 +1,352 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-orange: #ff6b35;
+  --light-orange: #ff8c61;
+  --dark-orange: #e85d2f;
+  --bg-gray: #f8f9fa;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  margin-left: 250px; 
+  background: var(--bg-gray);
+}
+
+.sidebar {
+    width: 460px;
+    height: 100vh; /* ليتناسب مع ارتفاع الصفحة */
+    background: #fae8ce;
+    padding: 1.5rem;
+    /* display: flex; */
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* التأكد من أن الشريط الجانبي في الأعلى */
+  }
+
+.company-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.company-logo {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-orange);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background: #f5f5f5;
+  color: var(--primary-orange);
+}
+
+.nav-link.active {
+  background: var(--primary-orange);
+  color: white;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  margin-left: 250px; /* لضمان عدم تغطية المحتوى للشريط الجانبي */
+}
+
+.stats-cards {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  min-width: 150px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-card h2 {
+  font-size: 2rem;
+  color: var(--primary-orange);
+  margin: 0;
+}
+
+.stat-card p {
+  margin: 0;
+  color: #666;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--primary-orange);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-select {
+  padding: 0.75rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  min-width: 150px;
+}
+
+.users-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: 500;
+  color: #666;
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navbar2 {
+    background-color: #fae8ce;
+    width: 100%;
+    height: 120px; /* تعيين ارتفاع ثابت */
+    display: flex; 
+    justify-content: space-between; /* توزيع العناصر بين الطرفين */
+    align-items: center; /* توسيط العناصر عموديًا */
+    padding: 0 20px; /* حشوات أفقية فقط */
+    box-sizing: border-box;
+    top: 0;
+    z-index: 1000;
+    overflow: hidden;
+    margin: auto;
+}
+
+
+.icon{
+    width: 100px;
+    transform: translateX(600px);
+    position: absolute;    
+    top: 0;
+}
+.buttonLan{
+    background-color: #ffffff;
+    color: #A33F00;
+    right: 800px;
+    border: none;
+    padding: 20px 30px;
+    font-size: 25px;
+    border-radius: 200px;
+    font-weight: bold;
+    position: absolute;
+}
+.buttonflag{
+    background-color: #ffffff;
+    color: #A33F00;
+    right: 700px;
+    border: none;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 50%; /* لجعل الزر دائريًا */
+    font-weight: bold;
+    position: absolute;
+    width: 80px; /* تحديد العرض */
+    height: 80px; /* تحديد الارتفاع */
+    text-align: center; /* لتوسيط النص داخل الزر */
+    line-height: 40px; 
+
+}
+.buttonperson{
+    background-color: #ffffff;
+    color: #A33F00;
+    right: 600px;
+    border: none;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 50%; /* لجعل الزر دائريًا */
+    font-weight: bold;
+    position: absolute;
+    width: 80px; /* تحديد العرض */
+    height: 80px; /* تحديد الارتفاع */
+    text-align: center; /* لتوسيط النص داخل الزر */
+    line-height: 40px; 
+
+}
+.footer {
+    background-color: #262626;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px 0;
+    position: relative; /* التأكد من أن الفوتر يظهر في الأسفل */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    transition: bottom 0.3s ease;
+    z-index: 1000;
+  }
+
+.footer-top {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footer-links a {
+    color: #868686;
+    margin: 0 50px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.footer-links a:hover {
+    text-align: left;
+    color: #868686;
+}
+
+.footer-middle {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.footer-section h3 {
+    text-align: left; /* لجعل النصوص تبدأ من الشمال */
+    color: #868686;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    text-align: left; /* لجعل النصوص داخل العناصر تبدأ من الشمال */
+    margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #ff6600;
+}
+
+.social-icons a {
+    text-align: left;
+    margin: 0 10px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.social-icons a:hover {
+    text-align: left;
+    color: #ff6600;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+.divider {
+    border: 0;
+    border-top: 0.01em solid #979797; /* لون وسمك الخط */
+    margin: 50px 0; /* المسافة حول الخط */
+}
+
+.divider1 {
+    border: 0;
+    width: 50%;
+    border-top: 0.01em solid #979797; /* لون وسمك الخط */
+    margin: 50px 0;
+    margin: 20px auto; /* المسافة حول الخط */
+}
+
