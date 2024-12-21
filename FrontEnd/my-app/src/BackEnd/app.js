@@ -1,24 +1,123 @@
-const express = require("express")
-const mongoose = require('mongoose')
-const User = require('./models/user.model')
-const Payment = require('./models/payment.model')
+const express = require("express");
+const { v4 } = require('uuid');
+
+const mongoose = require('mongoose');
+const User = require('./models/user.model');
+const Payment = require('./models/payment.model');
 const Restaurant = require('./models/restaurant');
 const MenuItem = require('./models/menu'); 
 const Order = require('./models/orders'); 
 const Cart = require('./models/cart'); 
 const bcrypt = require('bcrypt');
-const mongouri = "mongodb://localhost:27017/lab1db"
+const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config() ;
+
 // app service 
 const app = express()
-
-
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
+const port = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
+app.use(cors());
+app.use(bodyParser.json());
+
+    mongoose.set("strictQuery", false)
+main().then(() => {
+        console.log('connected to MongoDB')}).catch((error) => {
+        console.log('can not connect to mongodb  '+error)
+    })
+
+
+async function main() {
+    
+
+    await mongoose.connect("mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk")
+    
+    
+}
 
 
 app.get('/', (req, res) => {
     res.send('Hello World, the winner team');
 });
+
+// Function to Add User
+async function addUser(userData) {
+    try {
+        // Check if the user already exists
+        const user_exists = await User.findOne({ email: userData.email });
+        if (!user_exists) {
+            const new_user = new User(userData); // Create a new user object
+            await new_user.save(); // Save the newly created user
+            console.log('User added successfully:', new_user);
+        } else {
+            console.log('User already exists with email:', userData.email);
+        }
+    } catch (error) {
+        throw new Error(`Error adding user: ${error.message}`);
+    }
+}
+
+
+
+
+// Function to Add Restaurant
+async function addRestaurant(Restaurant) {
+    try {
+        const restaurant = new Restaurant(Restaurant);
+        await restaurant.save();
+        return restaurant;
+    } catch (error) {
+        throw new Error(`Error adding restaurant: ${error.message}`);
+    }
+}
+
+
+// Function to Add Menu Item
+async function addMenuItem(MenuItem) {
+    try {
+        const menuItem = new MenuItem(MenuItem);
+        await menuItem.save();
+        return menuItem;
+    } catch (error) {
+        throw new Error(`Error adding menu item: ${error.message}`);
+    }
+}
+
+
+
+// Function to Add to Cart
+async function addToCart(Cart) {
+    try {
+        let cart = await Cart.findOne(userId);
+        if (!cart) {
+            cart = new Cart({ Cart});
+        } else {
+            cart.items.push(...items);
+            cart.totalPrice += totalPrice;
+        }
+        await cart.save();
+        return cart;
+    } catch (error) {
+        throw new Error(`Error adding to cart: ${error.message}`);
+    }
+}
+
+
+
+// Function to Place Order
+async function addOrder(Order) {
+    try {
+        const order = new Order(Order);
+        await order.save();
+        return order;
+    } catch (error) {
+        throw new Error(`Error placing order: ${error.message}`);
+    }
+}
+
 
 app.get('/users', async (req, res) => {
     try {
@@ -132,7 +231,7 @@ app.post('/user/addPayment', async (req, res) => {
 
 
 // Create Restaurant
-app.post('/restaurants', async (req, res) => {
+app.post('/restaurant', async (req, res) => {
     const { name, description, address, logo, ownerId } = req.body;
     try {
         const restaurant = new Restaurant({ name, description, address, logo, ownerId });
@@ -144,7 +243,7 @@ app.post('/restaurants', async (req, res) => {
 });
 
 // Get All Restaurants
-app.get('/restaurants', async (req, res) => {
+app.get('/restaurant', async (req, res) => {
     try {
         const restaurants = await Restaurant.find();
         res.status(200).json(restaurants);
@@ -227,13 +326,4 @@ app.get('/cart/:userId', async (req, res) => {
 // Elkot elkot2227271
 // Hazem hazem2227378
 
-const port = 5000 ;
-mongoose.set("strictQuery", false)
-mongoose.connect("mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk")
-.then(() => {
-    console.log('connected to MongoDB')
-    //listen on specific port 
-    app.listen(port, () => console.log(`listening at http://localhost:${port}`))
-}).catch((error) => {
-    console.log('can not connect to mongodb  '+error)
-})
+app.listen(port, () => console.log(`listening at http://localhost:${port}`))
