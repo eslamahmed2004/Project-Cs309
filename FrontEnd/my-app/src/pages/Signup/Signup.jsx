@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useForm  } from "react-hook-form";
+import { Link,useNavigate } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const SignUp = () => {
@@ -10,8 +10,10 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);  // إدارة حالة التحميل
 
   const password = watch("password");
+  const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
+    navigate("/signin");
     setLoading(true);  // تفعيل التحميل عند تقديم النموذج
     try {
       const response = await fetch('http://localhost:5000/register', {

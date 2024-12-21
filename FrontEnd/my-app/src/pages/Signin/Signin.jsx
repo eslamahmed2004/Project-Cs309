@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form"; 
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
     try {
+      navigate("/")
       const response = await fetch('http://localhost:5000/user/login', {
         method: 'POST',
         headers: {

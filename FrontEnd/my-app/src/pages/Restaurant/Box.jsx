@@ -22,7 +22,7 @@ const Box = () => {
   return (
     <div className="card-box-container">
       {restaurants.map((restaurant) => (
-        <div key={restaurant._id} className="card">  {/* استخدم _id كمفتاح */}
+        <div key={restaurant._id} className="card">  
           <img src={restaurant.logo} alt="Restaurant Logo" className="card-img-top" />
           <h2 className="card-title">{restaurant.title}</h2>
           <p className="card-text">{restaurant.description}</p>
