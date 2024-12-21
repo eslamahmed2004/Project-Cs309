@@ -56,6 +56,7 @@ const styles = {
     padding: "0 10px",
     boxSizing: "border-box",
   },
+
   box: {
     position: "relative",
     height: "600px",

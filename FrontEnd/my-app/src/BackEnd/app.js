@@ -2,17 +2,18 @@ const express = require("express")
 const mongoose = require('mongoose')
 const User = require('./models/user.model')
 const Payment = require('./models/payment.model')
-const Restaurant = require('./models/restaurant');
-const MenuItem = require('./models/menu'); 
-const Order = require('./models/orders'); 
-const Cart = require('./models/cart'); 
-const bcrypt = require('bcrypt');
-const Product  = require('../models/product.model')
+const Cart = require('./models/cart')
+const Restaurant = require('./models/restaurant') 
+const MenuItem = require('./models/cart')
+const Order = require('./models/cart')
 
-const mongouri = "mongodb://localhost:27017/lab1db"
+
+
+const bcrypt = require('bcrypt');
+const cors = require('cors');  // إضافة مكتبة CORS
+const mongouri = "mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk"
 // app service 
 const app = express()
-
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -35,6 +36,7 @@ app.get('/user/:id', async (req, res) => {
     try {
         const id = req.params.id;
         
+        // validate ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Invalid user ID format" });
         }
@@ -52,29 +54,45 @@ app.get('/user/:id', async (req, res) => {
 
 
 
-app.post('/register', async (req, res) => {
-
-    const { email, password, fullName, phoneNumber, address, image } = req.body;
-
+app.post("/register", async (req, res) => {
     try {
-        if (await User.findOne({ email })) {
-            return res.status(400).send(`email "${email}" is already exist`);
+        const { firstName, lastName, email, password, phoneNumber } = req.body;
+
+        if (!firstName || !lastName || !email || !password) {
+            return res.status(400).send({ message: "Missing required fields" });
         }
 
-        const user = new User({ email, password, fullName, phoneNumber, address, image });
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).send({ message: "Invalid email format" });
+        }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        if (await User.findOne({ email })) {
+            return res.status(400).send({ message: `Email "${email}" already exists` });
+        }
 
-        user.password = hashedPassword;
+        if (phoneNumber && !/^[0-9]{11}$/.test(phoneNumber)) {
+            return res.status(400).send({ message: "Phone number must be 11 digits" });
+        }
 
-        await user.save();
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        res.send(`user "${email}" added successfully`);
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+            phoneNumber: phoneNumber || null,
+        });
+
+        await newUser.save();
+        res.status(201).send({ message: "User added successfully", userId: newUser._id });
 
     } catch (err) {
-        res.status(500).send(`server error: ${err}`);
-    }
+        console.error("SignUp Error: ", err);  // تسجيل الخطأ في السجل
+        res.status(500).send({ message: "Server error", error: err.message });
+    } 
+    
 });
 
 
@@ -84,10 +102,9 @@ app.post('/user/login', async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(404).send('User not found');
+            return res.status(404).send('user not found');
         }
-
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await password === user.password;
         if (!isMatch) {
             return res.status(401).send('Invalid credentials');
         }
@@ -138,9 +155,9 @@ app.post('/user/addPayment', async (req, res) => {
 
 // Create Restaurant
 app.post('/restaurants', async (req, res) => {
-    const { name, description, address, logo, ownerId } = req.body;
+    const { title, description, address, logo, ownerId } = req.body;
     try {
-        const restaurant = new Restaurant({ name, description, address, logo, ownerId });
+        const restaurant = new Restaurant({ title, description, address, logo, ownerId });
         await restaurant.save();
         res.status(201).json(restaurant);
     } catch (error) {
@@ -227,74 +244,6 @@ app.get('/cart/:userId', async (req, res) => {
     }
 });
 
-const Product  = require('../models/product.model')
-
-
-//CREATE
-
-app.post("/add",  async (req, res) => {
-  const newProduct = new Product(req.body);
-
-  try {
-    const savedProduct = await newProduct.save();
-    res.status(200).json(savedProduct);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//UPDATE
-app.put("/:id", async (req, res) => {
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updatedProduct);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//DELETE
-app.delete("/:id",  async (req, res) => {
-  try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.status(200).json("Product has been deleted...");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//GET PRODUCT
-app.get("/find/:id", async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    res.status(200).json(product);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//GET ALL PRODUCTS
-app.get("/", async (req, res) => {
-
-    try {
-        const products = await Product.find({ });
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    } 
-  });
-
-
-
-
-
-
 /**  ----------------------------- START SERVER ----------------------------- **/
 
 // Elkot elkot2227271
@@ -302,11 +251,12 @@ app.get("/", async (req, res) => {
 
 const port = 5000 ;
 mongoose.set("strictQuery", false)
-mongoose.connect("mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk")
+mongoose
+.connect('mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?retryWrites=true&w=majority&appName=Talabatk')
 .then(() => {
     console.log('connected to MongoDB')
     //listen on specific port 
-    app.listen(port, () => console.log(`listening at http://localhost:${port}`))
+    app.listen(port, () => console.log('app started on port '+port))
 }).catch((error) => {
-    console.log('can not connect to mongodb  '+error)
+    console.log('cant connect to mongodb'+error)
 })

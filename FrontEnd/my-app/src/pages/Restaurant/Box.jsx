@@ -1,23 +1,36 @@
-import React from 'react';
-import { Foodres } from "../Show/Foodres";
-import { Link } from "react-router-dom";
-import "./Box.css"
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import "./Box.css";
 
 const Box = () => {
-    return (
-        <div className="card-box-container">
-            {
-                Foodres.map((res) => (
-                    <div key={res.id} className="card">
-                        <img src={"." + res.image} alt="ba" className="card-img-top" />
-                        <h2 className="card-title">{res.title}</h2>
-                        <p className="card-text">{res.description}</p>
-                        <Link to={`/restaurant/${res.id}`} className="btn btn-primary">More Details</Link>
-                    </div>
-                ))
-            }
+  const [restaurants, setRestaurant] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/restaurants');
+        const data = await response.json();
+        setRestaurant(data); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className="card-box-container">
+      {restaurants.map((restaurant) => (
+        <div key={restaurant._id} className="card">  
+          <img src={restaurant.logo} alt="Restaurant Logo" className="card-img-top" />
+          <h2 className="card-title">{restaurant.title}</h2>
+          <p className="card-text">{restaurant.description}</p>
+          <Link to={`/restaurant/${restaurant._id}`} className="btn btn-primary">More Details</Link>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default Box;

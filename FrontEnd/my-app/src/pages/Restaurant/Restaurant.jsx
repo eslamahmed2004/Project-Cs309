@@ -12,8 +12,8 @@ const Restaurant = ()=>{
 
     
 
-
     return(
+      
         <div>
             <navbar className="navbar2">
                 <Link to="/">
@@ -148,10 +148,6 @@ const Restaurant = ()=>{
     
         
   </div>
-
-
-
-
 </footer>
 
   </div>
