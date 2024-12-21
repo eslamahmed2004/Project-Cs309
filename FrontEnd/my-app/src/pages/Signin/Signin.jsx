@@ -1,36 +1,49 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form"; // استيراد مكتبة React Hook Form
+import { useForm } from "react-hook-form"; 
 import { Link } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-// import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
-
-
-
 
 const SignIn = () => {
-  const { register, handleSubmit, formState: { errors }, } = useForm();
-  const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // التعامل مع البيانات المرسلة
-  const onSubmit = (data) => {
-    setIsLoading(true); // تفعيل حالة التحميل
-    setTimeout(() => {
-      setIsLoading(false); // إلغاء حالة التحميل
-    }, 1000); // محاكاة تحميل لمدة ثانية
+  const onSubmit = async (formData) => {
+    try {
+      const response = await fetch('http://localhost:5000/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        // محاولة الحصول على التفاصيل من استجابة الخطأ
+        const errorData = await response.json(); // أو response.text() في حالة عدم وجود JSON
+        console.error('Error response:', errorData);
+        throw new Error(errorData.message || 'Login Failed'); // في حال كانت هناك رسالة خطأ محددة
+      }
+  
+      const data = await response.json();
+      setMessage('Login Successful!');
+      console.log('Response:', data);
+    } catch (error) {
+      // طباعة رسالة الخطأ التي تم استلامها
+      setMessage(error.message);
+      console.error('Error:', error);
+    }
   };
-  const [isOpen, setIsOpen] = useState(false); // حالة للتحكم في عرض الـ Popup
 
-  // دالة لفتح النافذة
+  const [isOpen, setIsOpen] = useState(false);
+
   const openPopup = () => {
     setIsOpen(true);
   };
 
-  // دالة لإغلاق النافذة
   const closePopup = () => {
     setIsOpen(false);
-  }; 
-
+  };
 
   return (
     <div>
@@ -48,7 +61,7 @@ const SignIn = () => {
               style={styles.input}
               {...register("email", { required: "Email is required" })}
             />
-            {errors.username && <p style={styles.error}>{errors.username.message}</p>}
+            {errors.email && <p style={styles.error}>{errors.email.message}</p>}
           </div>
 
           <div style={styles.field}>
@@ -56,9 +69,7 @@ const SignIn = () => {
             <input
               type={showPassword ? "text" : "password"}
               style={styles.input}
-              {...register("password", {
-                required: "Password is required",
-              })}
+              {...register("password", { required: "Password is required" })}
             />
             {errors.password && <p style={styles.error}>{errors.password.message}</p>}
           </div>
@@ -72,88 +83,84 @@ const SignIn = () => {
               Show Password
             </label>
 
-
             <div>
-      {/* زر لفتح الـ Popup */}
-      <Link style={{textDecoration:"none"}}>
-      <h4 style={styles.loan } onClick={openPopup}>Forget My password</h4> </Link>
-      
-      {/* عرض النافذة عند تغيير الحالة */}
-      {isOpen && (
-        <div style={styles.overlay2}>
-          <div style={styles.popup}>
-          <header style={styles.header} >
-          <h1 style={styles.title} >Forgotten Password</h1>
-          <button style={styles.closeButton2} onClick={closePopup}>&#x2715;</button>
+              <Link style={{ textDecoration: "none" }} onClick={openPopup}>
+                <h4 style={styles.loan}>Forget My password</h4>
+              </Link>
 
-          </header>
-            <p style={styles.content}>Enter your email address and we’ll send a link to change your password  </p>
-            {     /* الستايل بتاعهن */}
-            <div style={styles.field}> 
-            <label style={styles.label}>Email</label>
-            <input
-              type="email"
-              style={styles.fieldPop}
-              {...register("email", { required: "Email is required" })}
-            />
-            {errors.email && (
-              <p style={styles.error}>{errors.email.message}</p>
-            )}
+              {isOpen && (
+                <div style={styles.overlay2}>
+                  <div style={styles.popup}>
+                    <header style={styles.header}>
+                      <h1 style={styles.title}>Forgotten Password</h1>
+                      <button style={styles.closeButton2} onClick={closePopup}>✖</button>
+                    </header>
+                    <p style={styles.content}>
+                      Enter your email address and we’ll send a link to change your password
+                    </p>
+                    <div style={styles.field}>
+                      <label style={styles.label}>Email</label>
+                      <input
+                        type="email"
+                        style={styles.fieldPop}
+                        {...register("email", { required: "Email is required" })}
+                      />
+                      {errors.email && <p style={styles.error}>{errors.email.message}</p>}
+                    </div>
+                    <button onClick={() => alert("Send to email")} style={styles.closeButton}>
+                      Reset my password
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-            <button onClick={() => alert("Send to email")}  style={styles.closeButton}>
-              Reset my password
+
+          <div>
+            <button type="submit" style={styles.button}>
+              Sign In
             </button>
           </div>
-        </div>
-      )}
-    </div>
-          </div>
-<div>
-          <button type="submit" style={styles.button} disabled={onSubmit}>
-            {isLoading ? 'Signing in...' : 'Sign In'}
-          </button></div>
         </form>
 
         <p style={styles.signupText}>
-          Don't have an account? <span style={styles.signupLink}> 
-            <Link to="/signup" style={{textDecoration: "none",color:"black"}}>Create an account</Link></span>
+          Don't have an account? <span style={styles.signupLink}>
+            <Link to="/signup" style={{ textDecoration: "none", color: "black" }}>Create an account</Link>
+          </span>
         </p>
       </div>
 
       <footer style={styles.footer}>
-  <p style={styles.footerText}>© 2024 My Website. All rights reserved.</p>
-  <p style={styles.footerText}>
-    <a href="/privacy-policy" style={styles.link}>Privacy Policy</a> | 
-    <a href="/terms" style={styles.link}>Terms of Service</a>
-  </p>
-  <div style={styles.socialIcons}>
-    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-linkedin" style={styles.icon}></i>
-    </a>
-    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-facebook" style={styles.icon}></i>
-    </a>
-    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-twitter" style={styles.icon}></i>
-    </a>
-    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-youtube" style={styles.icon}></i>
-    </a>
-  </div>
-  
-</footer>
-
+        <p style={styles.footerText}>© 2024 My Website. All rights reserved.</p>
+        <p style={styles.footerText}>
+          <a href="/privacy-policy" style={styles.link}>Privacy Policy</a> |
+          <a href="/terms" style={styles.link}>Terms of Service</a>
+        </p>
+        <div style={styles.socialIcons}>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-linkedin" style={styles.icon}></i>
+          </a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-facebook" style={styles.icon}></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-twitter" style={styles.icon}></i>
+          </a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-youtube" style={styles.icon}></i>
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };
 
 const styles = {
   container: {
-    width: "90%", // بدلًا من حجم ثابت
-    maxWidth: "600px", // حد أقصى للعرض
-    marginTop: "350px", // محاذاة تلقائية
-    marginLeft: "950px", // محاذاة تلقائية
-
+    width: "90%",
+    maxWidth: "600px",
+    marginTop: "350px",
+    marginLeft: "950px",
     padding: "20px",
     border: "1px solid #c14400",
     borderRadius: "8px",
@@ -214,9 +221,9 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    display: "flex", // تفعيل Flexbox
-    justifyContent: "center", // محاذاة أفقية
-    alignItems: "center", // محاذاة رأسية
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundImage: "url('/wallpaper-signin.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center center",
@@ -268,8 +275,6 @@ const styles = {
     color: "#c14400",
     textAlign: "center",
     fontWeight: "bold",
-  //  fontSize: "15px",
-
   },
   signupLink: {
     color: "#c14400",
@@ -277,11 +282,10 @@ const styles = {
   loan:{
     color:"#c14400",
     textDecoration:"none",
-
   },
   openButton: {
     padding: "10px 20px",
-    backgroundColor: "rgba(255, 250, 240, 0.6)",    // color: "white",
+    backgroundColor: "rgba(255, 250, 240, 0.6)",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -292,76 +296,58 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1000,
+    zIndex: "10",
   },
   popup: {
     backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    padding: "30px",
+    borderRadius: "8px",
+    width: "300px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     textAlign: "center",
-    maxWidth: "400px",
-    width: "90%",
-  },
-  heading1: {
-    margin: "0 0 10px",
-  },
-  content: {
-    display:"flex",
-    textAlign: "left",
-
-  },
-  closeButton: {
-    padding: "10px 20px",
-    marginTop:"30px",
-    backgroundColor: "#c14400",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  fieldPop:{
-    width: "370px",
-    padding: "10px",
-    border: "1px solid #c14400",
-    borderRadius: "4px",
-    outline: "none",
-    backgroundColor: "rgba(255, 255, 255, 0.6)",
-    fontSize: "16px",
-
   },
   header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: '20px 15px',
-    marginBottom: "30px",
-    // border: '1px solid #ccc',
-    // borderRadius: '5px',
-    // boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   title: {
-    marginB: '100px',
-    fontSize: '16px',
-    fontWeight: 'bold',
+    fontSize: "18px",
+    fontWeight: "bold",
     color: "#c14400",
   },
   closeButton2: {
-    background: 'none',
-    border: 'none',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    color: 'black',
-    cursor: 'pointer',
+    backgroundColor: "transparent",
+    border: "none",
+    fontSize: "18px",
+    cursor: "pointer",
+    color: "#c14400",
   },
-  closeButtonHover: {
-    color: 'red',
+  content: {
+    marginTop: "20px",
+    color: "#555",
+    fontSize: "14px",
   },
+  fieldPop: {
+    width: "250px",
+    padding: "10px",
+    marginTop: "10px",
+    border: "1px solid #c14400",
+    borderRadius: "4px",
+  },
+  closeButton: {
+    padding: "10px 20px",
+    backgroundColor: "#c14400",
+    border: "none",
+    borderRadius: "5px",
+    color: "#fff",
+    cursor: "pointer",
+    marginTop: "20px",
+  }
 };
 
 export default SignIn;

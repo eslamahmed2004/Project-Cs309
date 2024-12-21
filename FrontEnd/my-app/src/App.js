@@ -9,6 +9,10 @@ import Restaurant from "./pages/Restaurant/Restaurant.jsx";
 import Drink from './pages/Drinks/Drink.jsx';
 import Medicine from './pages/Medicine/Medicine.jsx';
 import ProfileData from './pages/ProfileData/ProfileData.jsx';
+import Additem from './pages/Admin/Additem/Additem.jsx';
+import Dash  from './pages/Admin/Dash/Dash.jsx';
+
+
 
 
 
@@ -36,6 +40,9 @@ function App() {
       <Route path="/" element={<Main/>}/>
       <Route path="/AddCart" element={<Detalis/>}/>
       <Route path="/ProfileData" element={<ProfileData/>}/>
+      <Route path="/admin" element={<Dash/>}/>
+      <Route path="/admin/add" element={<Additem/>}/>
+
       </Routes>
       </Router>
     </div>

@@ -41,15 +41,27 @@ const Food = () => {
 };
 const styles = {
   container: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-    gap: "20px",
+    maxWidth: "1800px", // الحد الأقصى للعرض
+    width: "100%", // العرض يتناسب مع الشاشة
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "center",
+    alignItems: "stretch",
+    gap: "60px",
     margin: "20px auto",
-    padding: "0 10px",
+    paddingLeft: "20px",
+    paddingTop: "20px",
   },
+
   box: {
     position: "relative", // يضمن أن النصوص والصورة يمكن التحكم في وضعها داخل الصندوق
+<<<<<<< HEAD
+    height: "600px",
+    width:"500px", // ارتفاع ثابت للمربع
+=======
     height: "600px", // ارتفاع ثابت للمربع
+    width: "250px", // عرض ث
+>>>>>>> 40ba4825f06550739cb0db139e2fb839ec5849be
     backgroundColor: "#ff7e5f",
     color: "#fff",
     borderRadius: "10px",

@@ -4,15 +4,18 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
     {
-        id :{type: String,unique: true, required: true},
+        // id :{type: String,unique: true, required: true},
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        id :{type: String,unique: true, required: false},
         fullName: { type: String, required: true },
         email: { type: String, unique: true, required: true },
         password: { type: String, required: true },
         phoneNumber: { type: String, required: false },
-        image: { type: String, required: false },
-        address: { type: String, required: false },
-        payments: [
-            {type: mongoose.Schema.Types.ObjectId,ref: 'Payment', },]
+        // image: { type: String, required: false },
+        // address: { type: String, required: false },
+        // payments: [
+        //     {type: mongoose.Schema.Types.ObjectId,ref: 'Payment', },]
 
     },
     {

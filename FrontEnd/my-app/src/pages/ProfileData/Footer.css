@@ -1,14 +1,25 @@
+/* ضبط صفحة كاملة */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* يجعل ارتفاع الصفحة 100% من ارتفاع النافذة */
+    margin: 0;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    flex: 1; /* يجعل المحتوى الرئيسي يمتد ليملأ الفراغ بين الهيدر والفوتر */
+}
+
+/* الفوتر */
 .footer {
     background-color: #262626;
     color: #ffffff;
     font-family: Arial, sans-serif;
     padding: 20px 0;
-    bottom: -100px; 
-    left: 0;
-    width: 100%; 
+    width: 100%;
     text-align: center;
-    transition: bottom 0.3s ease;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .footer-top {
@@ -19,13 +30,11 @@
 .footer-links a {
     color: #868686;
     margin: 0 50px;
-    text-align: left;
     text-decoration: none;
     font-size: 20px;
 }
 
 .footer-links a:hover {
-    text-align: left;
     color: #868686;
 }
 
@@ -36,7 +45,6 @@
 }
 
 .footer-section h3 {
-    text-align: left; /* لجعل النصوص تبدأ من الشمال */
     color: #868686;
     margin-bottom: 10px;
 }
@@ -47,7 +55,6 @@
 }
 
 .footer-section ul li {
-    text-align: left; /* لجعل النصوص داخل العناصر تبدأ من الشمال */
     margin-bottom: 5px;
 }
 
@@ -61,14 +68,12 @@
 }
 
 .social-icons a {
-    text-align: left;
     margin: 0 10px;
     font-size: 20px;
     color: #ffffff;
 }
 
 .social-icons a:hover {
-    text-align: left;
     color: #ff6600;
 }
 
@@ -81,15 +86,13 @@
 
 .divider {
     border: 0;
-    border-top: 0.01em solid #979797; /* لون وسمك الخط */
-    margin: 50px 0; /* المسافة حول الخط */
+    border-top: 0.01em solid #979797;
+    margin: 50px 0;
 }
 
 .divider1 {
     border: 0;
-    width: 50%;
-    border-top: 0.01em solid #979797; /* لون وسمك الخط */
-    margin: 50px 0;
-    margin: 20px auto; /* المسافة حول الخط */
+    width: 70%;
+    border-top: 0.01em solid #979797;
+    margin: 20px auto;
 }
-
