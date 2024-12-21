@@ -21,8 +21,9 @@ const StyledSearch = {
   container: {
     textAlign: "center", // لتوسيط المحتوى داخل الـ div
     padding: "20px 0", // إضافة padding أعلى وأسفل
-    background: "#fdc3a4", // تدرج لوني من اللون البرتقالي إلى الوردي
+    background: "#f87800", // تدرج لوني من اللون البرتقالي إلى الوردي
     minHeight: "100%", // لضمان أن المحتوى يملأ الشاشة بالكامل
+    borderRadius : "0px"
   },
   searchWrapper: {
     position: "relative", // لتحديد موضع الأيقونة داخل حقل البحث

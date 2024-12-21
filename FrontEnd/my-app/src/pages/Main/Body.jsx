@@ -7,88 +7,114 @@ const Food = () => {
       <Link to="/restaurant" style={styles.Link}>
         <div style={styles.box}>
           <img src="/wallpaperflare.com_wallpaper(3).jpg" alt="icon" style={styles.icon} />
-          <h1 style={styles.H1}>Order Food</h1>
-          <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
-          <p style={styles.Body}>
-            توصيل مجاني وعروض حصرية وأكثر لدى شركائنا من المطاعم.
-          </p>
+          <div style={styles.overlay}>
+            <h1 style={styles.H1}>Order Food</h1>
+            <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
+            <p style={styles.Body}>
+              توصيل مجاني وعروض حصرية وأكثر لدى شركائنا من المطاعم.
+            </p>
+          </div>
         </div>
       </Link>
 
       <Link to="/drink" style={styles.Link}>
         <div style={styles.box}>
-          <img src="/wallpaperflare.com_wallpaper(4).jpg" alt="icon" style={styles.icon} />
-          <h1 style={styles.H1}>Order Snacks</h1>
-          <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
-          <p style={styles.Body}>
-            لا تضيع وقتك في الانتظار . نوصلك لك الطعام في أسرع وقت.
-          </p>
+          <img src="/download.jpeg" alt="icon" style={styles.icon} />
+          <div style={styles.overlay}>
+            <h1 style={styles.H1}>Order Drinks</h1>
+            <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
+            <p style={styles.Body}>
+              لا تضيع وقتك في الانتظار. نوصلك لك الطعام في أسرع وقت.
+            </p>
+          </div>
         </div>
       </Link>
 
       <Link to="/medicine" style={styles.Link}>
         <div style={styles.box}>
           <img src="/wallpaperflare.com_wallpaper(5).jpg" alt="icon" style={styles.icon} />
-          <h1 style={styles.H1}>Order Medicin</h1>
-          <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
-          <p style={styles.Body}>
-            نوصلك لك الدواء في أسرع وقت.
-          </p>
+          <div style={styles.overlay}>
+            <h1 style={styles.H1}>Order Medicine</h1>
+            <img src="/order_now.svg" alt="icon" style={styles.orderIcon} />
+            <p style={styles.Body}>
+              نوصلك لك الدواء في أسرع وقت.
+            </p>
+          </div>
         </div>
       </Link>
     </div>
   );
 };
+
 const styles = {
   container: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-    gap: "20px",
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: "30px",
     margin: "20px auto",
     padding: "0 10px",
+    boxSizing: "border-box",
   },
   box: {
-    position: "relative", // يضمن أن النصوص والصورة يمكن التحكم في وضعها داخل الصندوق
-    height: "600px", // ارتفاع ثابت للمربع
-    width: "250px", // عرض ث
+    position: "relative",
+    height: "600px",
+    minWidth: "250px",
+    maxWidth: "400px",
     backgroundColor: "#ff7e5f",
     color: "#fff",
     borderRadius: "10px",
     overflow: "hidden",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     transition: "transform 0.3s ease-in-out",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: "60px",
+    // تأثير التمدد عند التمرير فوق المربع
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
   },
   icon: {
-    position: "absolute", // يسمح للصورة بشغل كامل مساحة المربع
+    position: "absolute",
     top: "0",
     left: "0",
     width: "100%",
     height: "100%",
-    objectFit: "cover", // يجعل الصورة تغطي المربع بشكل كامل دون تشويه
-    zIndex: "0", // يجعل الصورة في الخلفية
+    objectFit: "cover",
+    zIndex: "0",
+  },
+  overlay: {
+    position: "absolute",
+    bottom: "0",
+    left: "0",
+    width: "100%",
+    background: "rgba(0, 0, 0, 0.5)",
+    padding: "20px",
+    color: "#fff",
+    zIndex: "1",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   H1: {
-    position: "relative", // يبقي النص فوق الصورة
-    fontSize: "1.5rem",
+    fontSize: "2rem", // تقليل حجم الخط قليلاً
     fontWeight: "bold",
-    color: "rgba(0, 0, 0, 0.8)",
-    margin: "20px",
-    zIndex: "1", // يضمن بقاء النص فوق الصورة
+    textAlign: "center",
+    marginBottom: "15px",
   },
   Body: {
-    position: "relative", // يبقي النص فوق الصورة
-    fontSize: "1rem",
+    fontSize: "1.3rem", // تقليل حجم الخط قليلاً
+    textAlign: "left",
+    marginTop: "15px",
     color: "rgba(255, 255, 255, 0.8)",
-    marginTop: "10px",
-    zIndex: "1", // يضمن بقاء النص فوق الصورة
   },
   orderIcon: {
-    position: "absolute",
-    bottom: "20px",
-    right: "20px",
-    width: "70px",
-    height: "70px",
-    zIndex: "2", // فوق الصورة لكن تحت النصوص الأخرى
+    width: "80px", // تقليل حجم الأيقونة
+    height: "80px",
+    marginTop: "15px",
   },
   Link: {
     textDecoration: "none",
@@ -96,16 +122,27 @@ const styles = {
   // استجابة للشاشات الصغيرة
   "@media (max-width: 768px)": {
     container: {
-      flexDirection: "column", // ترتيب المربعات عموديًا
+      flexDirection: "column", // ترتيب العناصر عموديًا في الشاشات الصغيرة
       gap: "15px", // تقليل المسافة بين المربعات
     },
     box: {
-      flex: "1 1 100%", // المربع يأخذ عرض الشاشة بالكامل
-      maxWidth: "100%", // عرض كامل للشاشة
-      minHeight: "400px", // نفس الحد الأدنى للارتفاع
+      width: "100%", // جعل المربعات تأخذ عرض كامل الشاشة في الشاشات الصغيرة
+      height: "500px", // تقليل ارتفاع المربعات في الشاشات الصغيرة
+    },
+    overlay: {
+      padding: "15px", // تقليل الحشو في الشاشات الصغيرة
+    },
+    H1: {
+      fontSize: "1.8rem", // تقليل حجم الخط في الشاشات الصغيرة
+    },
+    Body: {
+      fontSize: "1.1rem", // تقليل حجم الخط في الشاشات الصغيرة
+    },
+    orderIcon: {
+      width: "60px", // تقليل حجم الأيقونة في الشاشات الصغيرة
+      height: "60px",
     },
   },
 };
-
 
 export default Food;

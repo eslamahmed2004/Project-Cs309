@@ -14,17 +14,16 @@ const Application = () => {
       {/* الأيقونات الأخرى تحت النص */}
       <div style={style.iconWrapperContainer}>
         <div style={style.iconWrapper}>
-          <Link to={"www.apple.com"} style={style.linkStyle}>
-          <img src="logo_appstore.svg" alt="App Store" style={style.icon} />
-          <p style={style.iconText}>App Store</p>
+          <Link to="https://appstoreconnect.apple.com/login" target="blank" style={style.linkStyle}>
+            <img src="logo_appstore.svg" alt="App Store" style={style.icon} />
+            <p style={style.iconText}>App Store</p>
           </Link>
         </div>
         <div style={style.iconWrapper}>
-          <Link to= "www.googleplay.com" style={style.linkStyle}>
-          <img src="logo_playstore.svg" alt="Play Store" style={style.icon} />
-          <p style={style.iconText}>Play Store</p>
+          <Link to="https://play.google.com/store/games?hl=en&pli=1" target="blank" style={style.linkStyle}>
+            <img src="logo_playstore.svg" alt="Play Store" style={style.icon} />
+            <p style={style.iconText}>Play Store</p>
           </Link>
-        
         </div>
       </div>
     </div>
@@ -40,8 +39,9 @@ const style = {
     fontFamily: "'Cairo', sans-serif", // الخط
     borderRadius: '10px', // حواف دائرية للمربع
     margin: '20px auto', // المسافة حول المربع
-    maxWidth: '1000px', // تحديد أقصى عرض للمربع
+    maxWidth: '1500px', // تحديد أقصى عرض للمربع
     width: '100%', // لضمان أن العرض سيكون مرنًا ويأخذ المساحة المتاحة
+    boxSizing: 'border-box',
   },
   headingStyle: {
     fontSize: '32px',
@@ -54,16 +54,17 @@ const style = {
   },
   iconContainer: {
     display: 'flex',
-    justifyContent: 'flex-start', // محاذاة الصورة إلى اليسار
+    justifyContent: 'center', // محاذاة الأيقونات في المنتصف
     marginTop: '30px', // إضافة مسافة فوق الأيقونة
     flexWrap: 'wrap', // لضمان أن الأيقونات تتوزع بشكل مرن في الأسطر
     gap: '20px',
+    justifyContent: 'center', // محاذاة الأيقونات في الوسط
   },
   iconWrapperContainer: {
     display: 'flex',
     justifyContent: 'center', // محاذاة الأيقونات في الوسط
     gap: '30px', // المسافة بين الأيقونات
-    marginTop: '-70px', // إضافة مسافة فوق الأيقونات
+    marginTop: '20px', // تعديل المسافة بين الأيقونات
     flexWrap: 'wrap', // يجعل الأيقونات تتحرك وتتكيف مع الشاشات الصغيرة
   },
   iconWrapper: {
@@ -154,6 +155,5 @@ const style = {
     },
   },
 };
-
 
 export default Application;

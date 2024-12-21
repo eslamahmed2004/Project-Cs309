@@ -41,7 +41,6 @@ export const Main = () => {
         </div>
       )}
 
-      <Footer />
     </div>
   );
 };
