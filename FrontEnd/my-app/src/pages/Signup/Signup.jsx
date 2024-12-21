@@ -150,7 +150,7 @@ const SignUp = () => {
               </label>
             </div>
 
-            <div style={styles.field}>
+            {/* <div style={styles.field}>
               <label style={styles.label}>Country</label>
               <select
                 style={styles.input}
@@ -166,7 +166,7 @@ const SignUp = () => {
               {errors.country && (
                 <p style={styles.error}>{errors.country.message}</p>
               )}
-            </div>
+            </div> */}
 
             <button style={styles.button} type="submit" disabled={loading}>
               {loading ? 'Signing Up...' : 'Sign Up'}
@@ -193,6 +193,9 @@ const SignUp = () => {
           </a>
         </p>
         <div style={styles.socialIcons}>
+          <Link to="/">
+                              <img src="./home.png" alt="icon" className="icon" />
+                          </Link>
           <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-linkedin" style={styles.icon}></i>
           </a>
@@ -213,56 +216,64 @@ const SignUp = () => {
 
 
 const styles = {
+  // Container styles
   container: {
-    maxWidth: "840px",
-    margin: "100px auto 100px auto",
-    marginLeft: "1200px",
+    width: "840px", // الحد الأقصى للعرض
     padding: "20px",
     border: "1px solid #c14400",
     borderRadius: "8px",
-    backgroundColor: "rgba(255, 250, 240, 0.6)", // Slightly transparent background
+    backgroundColor: "rgba(255, 250, 240, 0.6)", // خلفية شفافة قليلاً
     textAlign: "center",
     fontFamily: "Arial, sans-serif",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // إضافة تأثير الظل
   },
+
+  // Heading styles
   heading: {
     marginBottom: "20px",
     color: "#c14400",
     fontSize: "30px",
     fontWeight: "bold",
   },
+
+  // Form styles
   form: {
-    width: "790px",
+    width: "790px", // عرض النموذج
     display: "flex",
     flexDirection: "column",
-    gap: "15px",
   },
+
+  // Field styles
   field: {
     textAlign: "left",
     color: "#c14400",
     fontWeight: "bold",
-
-
   },
+
+  // Label styles
   label: {
     fontWeight: "bold",
     color: "#c14400",
   },
+
+  // Input styles
   input: {
-    width: "770px",
-    padding: "10px",
+    width: "770px", // عرض المدخل
     border: "1px solid #c14400",
     borderRadius: "4px",
-    outline: "none",
+    outline: "none", // إزالة التحديد الافتراضي
     backgroundColor: "rgba(255, 255, 255, 0.6)", // شفاف مع خلفية بيضاء
     fontSize: "16px", // تكبير الخط
-
   },
+
+  // Error message styles
   error: {
     color: "red",
     fontSize: "12px",
     marginTop: "5px",
   },
+
+  // Button styles
   button: {
     backgroundColor: "#c14400",
     color: "#fff",
@@ -271,13 +282,12 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
     fontWeight: "bold",
-    transition: "background-color 0.3s",
-    marginTop: "30px",
-    marginBottom: "0px",
+    transition: "background-color 0.3s", // تأثير التغيير في اللون
+    marginTop: "30px", // المسافة العلوية
+    marginBottom: "0px", // إزالة المسافة السفلية
   },
-  
- 
- 
+
+  // Background styles
   background: {
     position: "fixed",
     top: 0,
@@ -286,9 +296,11 @@ const styles = {
     height: "100%",
     backgroundColor: "rgba(255, 152, 0, 0)", // خلفية برتقالية شفافة
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "center", // محاذاة أفقية
+    alignItems: "center", // محاذاة رأسية
   },
+
+  // Footer styles
   footer: {
     backgroundColor: "#222",
     color: "#fff",
@@ -298,21 +310,24 @@ const styles = {
     bottom: 0,
     width: "100%",
   },
+
   footerText: {
     fontSize: "14px",
     margin: "5px 0",
   },
+
   link: {
     color: "#ff7f00",
     textDecoration: "none",
-    margin: "0 10px",
+    margin: "10px",
   },
- 
+
   socialIcons: {
     display: "flex",
     justifyContent: "center",
     marginTop: "10px",
   },
+
   icon: {
     fontSize: "24px",
     color: "#ffffff",
@@ -320,22 +335,11 @@ const styles = {
     transition: "color 0.3s",
     cursor: "pointer",
   },
+
   iconHover: {
     color: "#fff",
   },
-  responsiveImage: {
-    width: "100%", // اجعل العرض 100% من العنصر الحاوي
-    height: "auto", // اجعل الارتفاع يتكيف تلقائيًا مع العرض للحفاظ على النسب
-    maxHeight: "100vh", // حد أقصى للارتفاع ليكون داخل الشاشة
-    objectFit: "cover", // الحفاظ على ملء الصورة مع قطع الحواف إذا لزم الأمر
-    display: "block",
-  },
-  SignUpText: {
-    color: "#c14400",
-    fontWeight: "bold",
-    marginTop: "20px",
-    textDecoration: "none"
-  },
 };
+
 
 export default SignUp;

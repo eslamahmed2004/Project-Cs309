@@ -26,7 +26,7 @@ const Box = () => {
           <img src={restaurant.logo} alt="Restaurant Logo" className="card-img-top" />
           <h2 className="card-title">{restaurant.title}</h2>
           <p className="card-text">{restaurant.description}</p>
-          <Link to={`/restaurant/${restaurant._id}`} className="btn btn-primary">More Details</Link>
+          <Link to={`/restaurant/menu`} className="btn btn-primary">More Details</Link>
         </div>
       ))}
     </div>

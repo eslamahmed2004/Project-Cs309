@@ -159,10 +159,10 @@ const SignIn = () => {
 
 const styles = {
   container: {
-    width: "90%",
-    maxWidth: "600px",
-    marginTop: "350px",
-    marginLeft: "950px",
+    width: "90%", // بدلًا من حجم ثابت
+    maxWidth: "600px", // حد أقصى للعرض
+    marginTop: "350px", // محاذاة تلقائية
+    marginLeft: "950px", // محاذاة تلقائية
     padding: "20px",
     border: "1px solid #c14400",
     borderRadius: "8px",
@@ -193,7 +193,7 @@ const styles = {
     color: "#c14400",
   },
   input: {
-    width: "590px",
+    width: "500px",
     padding: "10px",
     border: "1px solid #c14400",
     borderRadius: "4px",
@@ -223,9 +223,9 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: "flex", // تفعيل Flexbox
+    justifyContent: "center", // محاذاة أفقية
+    alignItems: "center", // محاذاة رأسية
     backgroundImage: "url('/wallpaper-signin.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center center",
@@ -271,12 +271,12 @@ const styles = {
   iconHover: {
     color: "#fff",
   },
-
   signupText: {
     marginTop: "20px",
     color: "#c14400",
     textAlign: "center",
     fontWeight: "bold",
+  //  fontSize: "15px",
   },
   signupLink: {
     color: "#c14400",
@@ -287,7 +287,7 @@ const styles = {
   },
   openButton: {
     padding: "10px 20px",
-    backgroundColor: "rgba(255, 250, 240, 0.6)",
+    backgroundColor: "rgba(255, 250, 240, 0.6)",    // color: "white",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -298,58 +298,74 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: "10",
+    zIndex: 1000,
   },
   popup: {
     backgroundColor: "white",
-    padding: "30px",
-    borderRadius: "8px",
-    width: "300px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
     textAlign: "center",
+    maxWidth: "400px",
+    width: "90%",
   },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#c14400",
-  },
-  closeButton2: {
-    backgroundColor: "transparent",
-    border: "none",
-    fontSize: "18px",
-    cursor: "pointer",
-    color: "#c14400",
+  heading1: {
+    margin: "0 0 10px",
   },
   content: {
-    marginTop: "20px",
-    color: "#555",
-    fontSize: "14px",
-  },
-  fieldPop: {
-    width: "250px",
-    padding: "10px",
-    marginTop: "10px",
-    border: "1px solid #c14400",
-    borderRadius: "4px",
+    display:"flex",
+    textAlign: "left",
   },
   closeButton: {
     padding: "10px 20px",
+    marginTop:"30px",
     backgroundColor: "#c14400",
+    color: "white",
     border: "none",
     borderRadius: "5px",
-    color: "#fff",
     cursor: "pointer",
-    marginTop: "20px",
-  }
+  },
+  fieldPop:{
+    width: "370px",
+    padding: "10px",
+    border: "1px solid #c14400",
+    borderRadius: "4px",
+    outline: "none",
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+    fontSize: "16px",
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: '20px 15px',
+    marginBottom: "30px",
+    // border: '1px solid #ccc',
+    // borderRadius: '5px',
+    // boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+  },
+  title: {
+    marginB: '100px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: "#c14400",
+  },
+  closeButton2: {
+    background: 'none',
+    border: 'none',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: 'black',
+    cursor: 'pointer',
+  },
+  closeButtonHover: {
+    color: 'red',
+  },
 };
 
 export default SignIn;

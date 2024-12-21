@@ -15,8 +15,14 @@ const mongouri = "mongodb+srv://Elkot:elkot2227271@talabatk.evhrb.mongodb.net/?r
 // app service 
 const app = express()
 
+
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(cors({
+    origin: 'http://localhost:3000', // السماح بمصدر React
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true // إذا كنت تستخدم الـ Cookies
+}));
 
 
 app.get('/', (req, res) => {
@@ -104,7 +110,7 @@ app.post('/user/login', async (req, res) => {
         if (!user) {
             return res.status(404).send('user not found');
         }
-        const isMatch = await password === user.password;
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).send('Invalid credentials');
         }
@@ -259,4 +265,4 @@ mongoose
     app.listen(port, () => console.log('app started on port '+port))
 }).catch((error) => {
     console.log('cant connect to mongodb'+error)
-})
+})  

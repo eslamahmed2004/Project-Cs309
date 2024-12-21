@@ -54,8 +54,14 @@ const Navbar = () => {
           </>
         ) : (
           <>
+          <div>
+          <Link to="./ProfileData">Profile Data</Link>
+        </div>
             <div>
               <Link to="./signin">Sign In</Link>
+            </div>
+            <div>
+              <Link to="./AddCart"> Add Cart</Link>
             </div>
             <div>
               <Link to="./signup">Sign Up</Link>

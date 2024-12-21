@@ -49,33 +49,33 @@ const Food = () => {
 const styles = {
   container: {
     display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    gap: "30px",
-    margin: "20px auto",
+    width:"900px",
+    flexWrap: "nowrap",
+    alignItems: "stretch", // نفس الارتفاع
+    gap: "20px", // المسافة بين المربعات
+    margin: "60px auto",
     padding: "0 10px",
-    boxSizing: "border-box",
+    whiteSpace: "nowrap", // عدم الانتقال لسطر جديد
+    scrollSnapType: "x mandatory", // تحسين التمرير السلس
   },
-
   box: {
-    position: "relative",
-    height: "600px",
-    minWidth: "250px",
-    maxWidth: "400px",
+    // flex: "0 0 300px", // عرض ثابت لكل مربع
+    maxWidth: "300px",
+    minHeight: "400px", // ارتفاع ثابت
     backgroundColor: "#ff7e5f",
     color: "#fff",
-    borderRadius: "10px",
-    overflow: "hidden",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    transition: "transform 0.3s ease-in-out",
-    display: "flex",
+    // display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-end",
-    padding: "60px",
-    // تأثير التمدد عند التمرير فوق المربع
-    "&:hover": {
-      transform: "scale(1.05)",
-    },
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    position: "relative",
+    overflow: "hidden",
+    transition: "transform 0.3s ease-in-out",
+    scrollSnapAlign: "start", // تحسين محاذاة المربعات عند التمرير
+  
   },
   icon: {
     position: "absolute",
@@ -86,36 +86,26 @@ const styles = {
     objectFit: "cover",
     zIndex: "0",
   },
-  overlay: {
+  orderIcon: {
     position: "absolute",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    background: "rgba(0, 0, 0, 0.5)",
-    padding: "20px",
-    color: "#fff",
+    bottom: "30px",
+    right: "20px",
+    width: "100px",
+    height: "80px",
     zIndex: "1",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
   },
   H1: {
-    fontSize: "2rem", // تقليل حجم الخط قليلاً
+    fontSize: "50px",
     fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: "15px",
+    color: "rgba(0,0,0,0.8)",
+    margin: "0",
+    zIndex: "0",
   },
   Body: {
-    fontSize: "1.3rem", // تقليل حجم الخط قليلاً
-    textAlign: "left",
-    marginTop: "15px",
-    color: "rgba(255, 255, 255, 0.8)",
-  },
-  orderIcon: {
-    width: "80px", // تقليل حجم الأيقونة
-    height: "80px",
-    marginTop: "15px",
+    fontSize: "40px",
+    color: "rgba(255,255,255,0.8)",
+    zIndex: "0",
+    marginTop: "10px",
   },
   Link: {
     textDecoration: "none",
